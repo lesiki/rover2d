@@ -6,7 +6,35 @@
 		<script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.0.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="animation.js"></script>
+		<h1>Moon Rovers</h1>
 		<canvas width="600" height="600" id="canvas">
 		</canvas>
+		<div id="inputs">
+			<p>
+				Enter the initial x and y positions (integers between 0 and 10), initial direction (0 for North, 1 for East, 2 for South and 3 for West) and the instructions
+			</p>
+			<p>Instructions can be:
+				<ul>
+					<li>M - Move forward 1 space</li>
+					<li>R - Turn right</li>
+					<li>L - Turn left</li>
+				</ul>
+			</p>
+			<p>
+				Sample input:
+				<ul>
+					<li>X: 0</li>
+					<li>Y: 1</li>
+					<li>Direction: 1</li>
+					<li>MMRMMLLMMM</li>
+				</ul>
+				<a href="#" id="demo">See this example in action</a>
+			</p>
+			<input type="text" name="initX" placeholder="Enter initial X position">
+			<input type="text" name="initY" placeholder="Enter initial Y position">
+			<input type="text" name="initDirection" placeholder="Enter initial direction">
+			<input type="text" name="instructions" placeholder="Enter Commands">
+			<button id="go">Go!</button>
+		</div>
 	</body>
 </html>

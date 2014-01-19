@@ -7,11 +7,14 @@ var Animation = function() {
 	rover,
 
 	init = function() {
+		drawGrid()
+	},
+	go = function(x, y, direction, instructions) {
 		rover = new Rover(gridSize);
-		rover.setPosition(0, 0);
-		rover.setDirection(1);
+		rover.setPosition(x, y);
+		rover.setDirection(direction);
 		rover.copyCurrentToTarget();
-		rover.setInstructions(["R", "M", "M"]);
+		rover.setInstructions(instructions.toUpperCase().split(''));
 		rover.nextCommand();
 		animate(canvas, context, new Date().getTime());
 	},
@@ -52,7 +55,7 @@ var Animation = function() {
 		}
 		else {
 			gradient.addColorStop("0","#999");
-			gradient.addColorStop("0.5","#eee");
+			gradient.addColorStop("0.5","#aaa");
 			gradient.addColorStop("1.0","#777");
 		}
 		context.fillStyle=gradient;
@@ -111,6 +114,7 @@ var Animation = function() {
 
 	this.context = context;
 	this.gridSize = gridSize;
+	this.go = go;
 	init();
 };
 var Rover = function(inputGridSize) {
@@ -199,4 +203,14 @@ var Rover = function(inputGridSize) {
 };
 $(function() {
 	animation = new Animation();
+	$('button#go').click(function() {
+		animation.go(parseInt($('input[name=initX]').val()), parseInt($('input[name=initY]').val()), parseInt($('input[name=initDirection]').val()), $('input[name=instructions]').val());
+	});
+	$('a#demo').click(function() {
+		$('input[name=initX]').val(0);
+		$('input[name=initY]').val(1);
+		$('input[name=initDirection]').val(1);
+		$('input[name=instructions]').val('MMRMMLLMMM');
+		$('button#go').click();
+	});
 });
