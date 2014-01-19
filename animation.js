@@ -11,7 +11,7 @@ var Animation = function() {
 		rover.setPosition(0, 0);
 		rover.setDirection(1);
 		rover.copyCurrentToTarget();
-		rover.setInstructions(["M", "R", "M", "R", "M", "M"]);
+		rover.setInstructions(["R", "M", "M"]);
 		rover.nextCommand();
 		animate(canvas, context, new Date().getTime());
 	},
@@ -96,9 +96,11 @@ var Animation = function() {
 		}
 		drawGrid();
 		drawRover(rover, time/10);
-		requestAnimFrame(function() {
-			animate(canvas, context, startTime);
-		});
+		if(rover.getState() !== 'finished' && rover.getState() !== 'crashed') {
+			requestAnimFrame(function() {
+				animate(canvas, context, startTime);
+			});
+		}
 	},
 	requestAnimFrame = (function(callback) {
 		return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
@@ -190,6 +192,9 @@ var Rover = function(inputGridSize) {
 			this.turn(true);
 		}
 		nextInstructionIndex ++;
+		if (nextInstructionIndex > commands.length) {
+			state = 'finished';
+		}
 	};
 };
 $(function() {
