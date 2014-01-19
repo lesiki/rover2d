@@ -169,7 +169,7 @@ var Rover = function(inputGridSize) {
 		else if(direction == 0) {
 			targetY = y - 1;
 		}
-		if(targetX < 0 || targetY < 0 || targetX > gridSize || targetY > gridSize) {
+		if(targetX < 0 || targetY < 0 || targetX > gridSize -1 || targetY > gridSize -1 ) {
 			state = 'crashed';
 			this.copyCurrentToTarget();
 		}
